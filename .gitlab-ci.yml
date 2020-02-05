@@ -1,12 +1,5 @@
 before_script:
-    stage: build
-    only:
-        refs:
-            - master
-    script:
-        - pod install
-    tags:
-        - macbookpro.nick`
+    - pod install
 
 deploy_project:
     stage: deploy
