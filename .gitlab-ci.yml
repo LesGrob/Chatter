@@ -3,7 +3,6 @@ stages:
 build_project:
     stage: build
     script:
-        - xcodebuild clean -project Chatter/Chatter.xcodeproj -scheme ChatterChatter
-        - xcodebuild test -project Chatter/Chatter.xcodeproj -scheme Chatter -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=13.3'
+        - xcodebuild clean -project Chatter.xcodeproj -scheme Chatter
     tags:
         - macbookpro.nick
