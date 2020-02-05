@@ -10,4 +10,4 @@ deploy_project:
         - xcodebuild clean -project Chatter.xcodeproj -scheme Chatter
         - echo Hello World!
     tags:
-        - macbookpro.nick
+        - nick
