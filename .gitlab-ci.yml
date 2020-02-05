@@ -1,5 +1,8 @@
 before_script:
     stage: build
+    only:
+        refs:
+            - master
     script:
         - pod install
     tags:
