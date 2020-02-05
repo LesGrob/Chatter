@@ -1,8 +1,17 @@
-stages:
-    - build
-build_project:
+before_script:
     stage: build
     script:
+        - pod install
+    tags:
+        - macbookpro.nick`
+
+deploy_project:
+    stage: deploy
+    only:
+        refs:
+            - master
+    script:
         - xcodebuild clean -project Chatter.xcodeproj -scheme Chatter
+        - echo Hello World!
     tags:
         - macbookpro.nick
