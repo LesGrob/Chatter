@@ -39,10 +39,11 @@ class PagerView: UIView {
     private let stepShadowedPointWidth: CGFloat = 8.0
     
     private let labelSize: CGFloat = 14.0
+    private let labelTopMargin: CGFloat = 8.0
     
     private let distanceBetweenPoints: CGFloat = 60.0
     
-    private let viewsTopMargin: CGFloat = 87
+    private var viewsTopMargin: CGFloat = 84
     
     convenience init(pages: [PageObject]) {
         self.init()
@@ -54,7 +55,26 @@ class PagerView: UIView {
         super.layoutSubviews()
         setupSliderView()
         setupViews()
-    }}
+    }
+    
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        setupSliderView()
+//        setupViews()
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        setupSliderView()
+//        setupViews()
+//    }
+//    
+//    override func prepareForInterfaceBuilder() {
+//        super.prepareForInterfaceBuilder()
+//        setupSliderView()
+//        setupViews()
+//    }
+}
 
 
 //    MARK:- init style setup
@@ -66,7 +86,7 @@ extension PagerView {
         
         self.slideMaxWidth = CGFloat(self.stepPointWidth * CGFloat(pages.count) + self.distanceBetweenPoints * CGFloat(pages.count - 1))
         
-        self.slider = UIView(frame: CGRect(x: (self.frame.width - slideMaxWidth)/2, y: 24, width: slideMaxWidth, height: stepPointWidth))
+        self.slider = UIView(frame: CGRect(x: (self.frame.width - slideMaxWidth)/2, y: 24, width: slideMaxWidth, height: (stepPointWidth+labelSize+labelTopMargin)))
         self.addSubview(slider)
         
         self.slideBackgroudView = UIView(frame: CGRect(x: 0, y: (slider.frame.height -  slideHeight) / 2, width: slideMaxWidth, height: slideHeight))
@@ -110,8 +130,8 @@ extension PagerView {
             
             // Item label
             let itemFrame = item.label.boundingRect(font: .customFont(ofSize: labelSize, weight: .light), countLine: 1)
-            let labelWidth = (itemFrame.width > 50 ? 50 : itemFrame.width) + 8
-            let labelY = point.frame.midY + stepPointWidth/2 + 8
+            let labelWidth = (itemFrame.width > 50 ? 50 : itemFrame.width) + 8.0
+            let labelY = point.frame.maxY + labelTopMargin
             let labelX = stepWidth * CGFloat(index) - labelWidth/2
             let label = UILabel(frame: CGRect(x: labelX, y: labelY , width: labelWidth, height: labelSize + 2))
             
@@ -126,6 +146,8 @@ extension PagerView {
     }
     
     private func setupViews(){
+        self.viewsTopMargin =  slider.frame.maxY + 24
+        
         for (index, item) in pages.enumerated() {
             let x  = index == 0 ? 0 : self.frame.width
             item.view.frame = CGRect(x: x, y: self.viewsTopMargin, width: self.frame.width, height: (self.frame.height - viewsTopMargin))
@@ -146,6 +168,9 @@ extension PagerView {
 extension PagerView {
     private func relayoutView(previousPage: Int) {
         let newWidth = self.slideMaxWidth * (CGFloat(currentPage) / CGFloat(pages.count - 1))
+        let height = self.frame.height - self.viewsTopMargin
+        let width = self.frame.width
+        
         let rightDirection = (previousPage == (pages.count-1) && currentPage == 0) || previousPage < currentPage
         if !rightDirection {
             self.pages[self.currentPage].view.center = CGPoint(x: -self.center.x, y: self.center.y)
@@ -159,19 +184,20 @@ extension PagerView {
                 self.stepPointViews[index].alpha = index != self.currentPage ? 0 : 1
             }
             
+            
             self.pages[self.currentPage].view.alpha = 1
             self.pages[previousPage].view.alpha = 0
             if rightDirection {
-                self.pages[self.currentPage].view.center = self.center
-                self.pages[previousPage].view.center = CGPoint(x: -self.center.x, y: self.center.y)
+                self.pages[self.currentPage].view.frame = CGRect(x: 0, y: self.viewsTopMargin, width: width, height: height)
+                self.pages[previousPage].view.frame = CGRect(x: -width, y: self.viewsTopMargin, width: width, height: height)
             } else {
-                self.pages[self.currentPage].view.center = self.center
-                self.pages[previousPage].view.center = CGPoint(x: self.center.x*2, y: self.center.y)
+                self.pages[self.currentPage].view.frame = CGRect(x: 0, y: self.viewsTopMargin, width: width, height: height)
+                self.pages[previousPage].view.frame = CGRect(x: width*2, y: self.viewsTopMargin, width: width, height: height)
             }
             
         }, completion: { _ in
             if rightDirection {
-                self.pages[previousPage].view.center = CGPoint(x: self.center.x*2, y: self.center.y)
+                self.pages[previousPage].view.frame = CGRect(x: width*2, y: self.viewsTopMargin, width: width, height: height)
             }
         })
     }

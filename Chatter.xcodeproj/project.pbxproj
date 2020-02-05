@@ -29,6 +29,8 @@
 		A382B6DB23E189A3008C56D2 /* DesignPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = A382B6DA23E189A3008C56D2 /* DesignPattern.swift */; };
 		A382B6DF23E1985E008C56D2 /* PagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A382B6DE23E1985E008C56D2 /* PagerView.swift */; };
 		A382B6E223E1A46A008C56D2 /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A382B6E123E1A46A008C56D2 /* Shadow.swift */; };
+		A3C980B223E95FAE00468E91 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C980B123E95FAE00468E91 /* RoundedButton.swift */; };
+		A3C980B523E99FF200468E91 /* PhoneInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C980B423E99FF200468E91 /* PhoneInput.swift */; };
 		D8B0BBF2704417F75B949C23 /* Pods_Chatter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 443AB1E92F3C4291F9A6FBEF /* Pods_Chatter.framework */; };
 		F9B23F74FE69884FE0BA2E86 /* Pods_Chatter_ChatterUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A337274D5BD8C44517B2F1 /* Pods_Chatter_ChatterUITests.framework */; };
 /* End PBXBuildFile section */
@@ -83,6 +85,8 @@
 		A382B6DA23E189A3008C56D2 /* DesignPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignPattern.swift; sourceTree = "<group>"; };
 		A382B6DE23E1985E008C56D2 /* PagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagerView.swift; sourceTree = "<group>"; };
 		A382B6E123E1A46A008C56D2 /* Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
+		A3C980B123E95FAE00468E91 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		A3C980B423E99FF200468E91 /* PhoneInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInput.swift; sourceTree = "<group>"; };
 		A5A337274D5BD8C44517B2F1 /* Pods_Chatter_ChatterUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chatter_ChatterUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEBE208D0963B0D8DB64629C /* Pods-Chatter-ChatterUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatter-ChatterUITests.release.xcconfig"; path = "Target Support Files/Pods-Chatter-ChatterUITests/Pods-Chatter-ChatterUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E542D5C18D0A77A68F62C8FD /* Pods-Chatter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatter.debug.xcconfig"; path = "Target Support Files/Pods-Chatter/Pods-Chatter.debug.xcconfig"; sourceTree = "<group>"; };
@@ -243,6 +247,8 @@
 		A382B6DC23E1981E008C56D2 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A3C980B323E99FBA00468E91 /* Inputs */,
+				A3C980B023E95F9000468E91 /* Buttons */,
 				A382B6DD23E19826008C56D2 /* Pager */,
 			);
 			path = Components;
@@ -264,6 +270,22 @@
 				A382B6E123E1A46A008C56D2 /* Shadow.swift */,
 			);
 			path = Style;
+			sourceTree = "<group>";
+		};
+		A3C980B023E95F9000468E91 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				A3C980B123E95FAE00468E91 /* RoundedButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		A3C980B323E99FBA00468E91 /* Inputs */ = {
+			isa = PBXGroup;
+			children = (
+				A3C980B423E99FF200468E91 /* PhoneInput.swift */,
+			);
+			path = Inputs;
 			sourceTree = "<group>";
 		};
 		B7282471A8E3598E6D6BA09D /* Pods */ = {
@@ -491,11 +513,13 @@
 				A382B6D323E182E1008C56D2 /* AuthorizationViewController.swift in Sources */,
 				A382B69B23E17A6E008C56D2 /* AppDelegate.swift in Sources */,
 				A382B6D023E18032008C56D2 /* Colors.swift in Sources */,
+				A3C980B523E99FF200468E91 /* PhoneInput.swift in Sources */,
 				A382B6CD23E17FD9008C56D2 /* BaseViewController.swift in Sources */,
 				A382B6DF23E1985E008C56D2 /* PagerView.swift in Sources */,
 				A332030223E8408E00E6F49D /* AuthorizationViewDecorator.swift in Sources */,
 				A332031D23E85BFA00E6F49D /* UIFont.swift in Sources */,
 				A382B6E223E1A46A008C56D2 /* Shadow.swift in Sources */,
+				A3C980B223E95FAE00468E91 /* RoundedButton.swift in Sources */,
 				A382B6DB23E189A3008C56D2 /* DesignPattern.swift in Sources */,
 				A382B6D923E186FE008C56D2 /* AuthorizationDataSource.swift in Sources */,
 			);
