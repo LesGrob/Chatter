@@ -5,7 +5,7 @@ deploy_project:
     stage: deploy
     only:
         refs:
-            - master
+            - release
     script:
         - xcodebuild clean -project Chatter.xcodeproj -scheme Chatter
         - echo Hello World!
