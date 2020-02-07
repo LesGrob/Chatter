@@ -20,12 +20,14 @@ class PhoneInput: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         super.init(frame: frame)
         setupView()
         configurePicker()
+        dismissPickerView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupView()
         configurePicker()
+        dismissPickerView()
     }
 
     private func setupView(){
@@ -38,19 +40,18 @@ class PhoneInput: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         zoneInput = UITextField()
         zoneInput.translatesAutoresizingMaskIntoConstraints = false
         zoneInput.font = .customFont(ofSize: 16, weight: .light)
-        zoneInput.text = "+20"
+        zoneInput.text = self.zones[0]
         zoneInput.textColor = UIColor.Default.black
         
-        let arrow = UIImageView(image: UIImage(named: "arrow_down"))
-        arrow.translatesAutoresizingMaskIntoConstraints = false
-        arrow.heightAnchor.constraint(equalToConstant: 9).isActive = true
-        arrow.widthAnchor.constraint(equalToConstant: 9).isActive = true
+        let arrowImg = UIImage.resize(image: UIImage(named: "arrow_down"), targetSize: CGSize(width: 9, height: 9))
+        let arrow = UIImageView(image: arrowImg)
+        arrow.frame = CGRect(x: 0, y: 0, width: 9, height: 9)
         zoneInput.rightView = arrow
         zoneInput.rightViewMode = .always
         
         addSubview(zoneInput)
         addConstraints([
-            zoneInput.widthAnchor.constraint(equalToConstant: 42),
+            zoneInput.widthAnchor.constraint(equalToConstant: 47),
             zoneInput.topAnchor.constraint(equalTo: topAnchor),
             zoneInput.bottomAnchor.constraint(equalTo: bottomAnchor),
             zoneInput.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18)
@@ -68,12 +69,11 @@ class PhoneInput: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
             separatorView.leadingAnchor.constraint(equalTo: zoneInput.trailingAnchor, constant: 10)
         ])
         
-        
         numberInput = UITextField()
         numberInput.translatesAutoresizingMaskIntoConstraints = false
         numberInput.font = .customFont(ofSize: 16, weight: .light)
         numberInput.keyboardType = .numberPad
-        numberInput.text = "9231239898"
+        numberInput.text = ""
         numberInput.textColor = UIColor.Default.black
         addSubview(numberInput)
         addConstraints([
@@ -86,18 +86,18 @@ class PhoneInput: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     
     private func configurePicker(){
         let picker = UIPickerView()
-        picker.translatesAutoresizingMaskIntoConstraints = false
         picker.delegate = self
         picker.dataSource = self
-        addSubview(picker)
-
-        addConstraints([
-            picker.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            picker.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            picker.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor)
-        ])
-        
         self.zoneInput.inputView = picker
+    }
+    
+    private func dismissPickerView() {
+       let toolBar = UIToolbar()
+       toolBar.sizeToFit()
+        let button = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissPicker))
+       toolBar.setItems([button], animated: true)
+       toolBar.isUserInteractionEnabled = true
+       self.zoneInput.inputAccessoryView = toolBar
     }
 }
 
@@ -113,5 +113,13 @@ extension PhoneInput {
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         self.zones[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.zoneInput.text = self.zones[row]
+    }
+    
+    @objc func dismissPicker() {
+        self.endEditing(true)
     }
 }

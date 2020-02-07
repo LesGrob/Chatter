@@ -10,9 +10,8 @@ import UIKit
 
 class AuthorizationViewController: BaseViewController {
     var interpreter: Interpreter!
-    var decoder: AuthorizationViewDecorator!
     
-    var stepper: PagerView!
+    var pager: PagerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,32 +19,36 @@ class AuthorizationViewController: BaseViewController {
         let presenter = AuthorizationPresenter(controller: self, dataSource: dataSource)
         self.interpreter = AuthorizationInterpreter(presenter: presenter, dataSource: presenter.dataSource)
         
-        self.decoder = AuthorizationViewDecorator(chagePage: chagePage)
-        
         self.configureViews()
     }
     
     func configureViews() {
-        let page1 = PageObject(label: "start", view: decoder.page1)
-        let page2 = PageObject(label: "number", view: decoder.page2)
-        let page3 = PageObject(label: "verify", view: decoder.page3)
-        let page4 = PageObject(label: "details", view: decoder.page4)
+        let page1 = PageObject(label: "start", view: AuthorizationPageStart(changePage: changePage))
+        let page2 = PageObject(label: "number", view: AuthorizationPageNumber(changePage: changePage))
+        let page3 = PageObject(label: "verify", view: AuthorizationPageVerify(changePage: changePage))
+        let page4 = PageObject(label: "details", view: AuthorizationPageDetails(changePage: changePage))
         
-        self.stepper = PagerView(pages: [page1, page2, page3, page4])
-        self.stepper.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(stepper)
+        self.pager = PagerView(pages: [page1, page2, page3, page4])
+        self.pager.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(pager)
         
-        stepper.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        stepper.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        stepper.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        stepper.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+        pager.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        pager.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        pager.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        pager.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
     }
     
-    func chagePage() -> Void{
-        var page = self.stepper.getCurrentPage + 1
-        if page > (self.stepper.getPages.count - 1) {
+    func changePage() -> Void{
+        var page = self.pager.getCurrentPage + 1
+        if page > (self.pager.getPages.count - 1) {
             page = 0
         }
-        self.stepper.set(page: page, completion: {})
+        self.pager.set(page: page, completion: {})
+    }
+}
+
+extension AuthorizationViewController {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }

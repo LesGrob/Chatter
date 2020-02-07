@@ -8,10 +8,31 @@
 
 import UIKit
 
+class AuthorizationViewPage: UIView {
+    var changePage: (() -> Void)?
+    
+    convenience init(changePage action: @escaping () -> Void){
+        self.init()
+        self.changePage = action
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+    
+    func setupView() { }
+}
+
 class PageObject {
     var label: String
-    var view: UIView
-    init(label: String, view: UIView) {
+    var view: AuthorizationViewPage
+    init(label: String, view: AuthorizationViewPage) {
         self.label = label
         self.view = view
     }

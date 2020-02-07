@@ -8,7 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		66A0CFB809DC1411C810496D /* Pods_ChatterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 667991B63AA328356C8DCBEC /* Pods_ChatterTests.framework */; };
-		A332030223E8408E00E6F49D /* AuthorizationViewDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A332030123E8408E00E6F49D /* AuthorizationViewDecorator.swift */; };
+		A30CEAF523ED785900512EBF /* UIImage+UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30CEAF423ED785900512EBF /* UIImage+UIImageView.swift */; };
+		A30CEAF823ED8BDE00512EBF /* AuthorizationPageStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30CEAF723ED8BDE00512EBF /* AuthorizationPageStart.swift */; };
+		A30CEAFA23ED8F0800512EBF /* AuthorizationPageNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30CEAF923ED8F0800512EBF /* AuthorizationPageNumber.swift */; };
+		A30CEAFC23ED951800512EBF /* AuthorizationPageVerify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30CEAFB23ED951800512EBF /* AuthorizationPageVerify.swift */; };
+		A30CEAFE23ED960A00512EBF /* AuthorizationPageDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30CEAFD23ED960A00512EBF /* AuthorizationPageDetails.swift */; };
 		A332031923E85B5100E6F49D /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A332031823E85B2B00E6F49D /* Montserrat-Light.ttf */; };
 		A332031A23E85B5500E6F49D /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A332031623E85B2B00E6F49D /* Montserrat-Medium.ttf */; };
 		A332031B23E85B5800E6F49D /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A332031723E85B2B00E6F49D /* Montserrat-Regular.ttf */; };
@@ -58,7 +62,11 @@
 		443AB1E92F3C4291F9A6FBEF /* Pods_Chatter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chatter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		667991B63AA328356C8DCBEC /* Pods_ChatterTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatterTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AC9A1D101AA97FD7E268716 /* Pods-ChatterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatterTests.debug.xcconfig"; path = "Target Support Files/Pods-ChatterTests/Pods-ChatterTests.debug.xcconfig"; sourceTree = "<group>"; };
-		A332030123E8408E00E6F49D /* AuthorizationViewDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewDecorator.swift; sourceTree = "<group>"; };
+		A30CEAF423ED785900512EBF /* UIImage+UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+UIImageView.swift"; sourceTree = "<group>"; };
+		A30CEAF723ED8BDE00512EBF /* AuthorizationPageStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPageStart.swift; sourceTree = "<group>"; };
+		A30CEAF923ED8F0800512EBF /* AuthorizationPageNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPageNumber.swift; sourceTree = "<group>"; };
+		A30CEAFB23ED951800512EBF /* AuthorizationPageVerify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPageVerify.swift; sourceTree = "<group>"; };
+		A30CEAFD23ED960A00512EBF /* AuthorizationPageDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPageDetails.swift; sourceTree = "<group>"; };
 		A332031623E85B2B00E6F49D /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		A332031723E85B2B00E6F49D /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		A332031823E85B2B00E6F49D /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
@@ -129,6 +137,17 @@
 				667991B63AA328356C8DCBEC /* Pods_ChatterTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A30CEAF623ED8BBD00512EBF /* AuthorizationPages */ = {
+			isa = PBXGroup;
+			children = (
+				A30CEAF723ED8BDE00512EBF /* AuthorizationPageStart.swift */,
+				A30CEAF923ED8F0800512EBF /* AuthorizationPageNumber.swift */,
+				A30CEAFB23ED951800512EBF /* AuthorizationPageVerify.swift */,
+				A30CEAFD23ED960A00512EBF /* AuthorizationPageDetails.swift */,
+			);
+			path = AuthorizationPages;
 			sourceTree = "<group>";
 		};
 		A332030323E85AA900E6F49D /* Fonts */ = {
@@ -219,6 +238,7 @@
 				A382B6CC23E17FD9008C56D2 /* BaseViewController.swift */,
 				A382B6DA23E189A3008C56D2 /* DesignPattern.swift */,
 				A35238B023E2FC87005C19F7 /* String.swift */,
+				A30CEAF423ED785900512EBF /* UIImage+UIImageView.swift */,
 				A382B6E023E1A45E008C56D2 /* Style */,
 			);
 			path = "Types+Extensions";
@@ -235,11 +255,11 @@
 		A382B6D123E182C1008C56D2 /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
+				A30CEAF623ED8BBD00512EBF /* AuthorizationPages */,
 				A382B6D223E182E1008C56D2 /* AuthorizationViewController.swift */,
 				A382B6D423E186CD008C56D2 /* AuthorizationInterpreter.swift */,
 				A382B6D623E186F3008C56D2 /* AuthorizationPresenter.swift */,
 				A382B6D823E186FE008C56D2 /* AuthorizationDataSource.swift */,
-				A332030123E8408E00E6F49D /* AuthorizationViewDecorator.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -515,12 +535,16 @@
 				A382B6D023E18032008C56D2 /* Colors.swift in Sources */,
 				A3C980B523E99FF200468E91 /* PhoneInput.swift in Sources */,
 				A382B6CD23E17FD9008C56D2 /* BaseViewController.swift in Sources */,
+				A30CEAF523ED785900512EBF /* UIImage+UIImageView.swift in Sources */,
+				A30CEAFA23ED8F0800512EBF /* AuthorizationPageNumber.swift in Sources */,
 				A382B6DF23E1985E008C56D2 /* PagerView.swift in Sources */,
-				A332030223E8408E00E6F49D /* AuthorizationViewDecorator.swift in Sources */,
 				A332031D23E85BFA00E6F49D /* UIFont.swift in Sources */,
+				A30CEAFE23ED960A00512EBF /* AuthorizationPageDetails.swift in Sources */,
 				A382B6E223E1A46A008C56D2 /* Shadow.swift in Sources */,
 				A3C980B223E95FAE00468E91 /* RoundedButton.swift in Sources */,
 				A382B6DB23E189A3008C56D2 /* DesignPattern.swift in Sources */,
+				A30CEAF823ED8BDE00512EBF /* AuthorizationPageStart.swift in Sources */,
+				A30CEAFC23ED951800512EBF /* AuthorizationPageVerify.swift in Sources */,
 				A382B6D923E186FE008C56D2 /* AuthorizationDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
