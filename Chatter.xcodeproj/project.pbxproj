@@ -13,6 +13,7 @@
 		A30CEAFA23ED8F0800512EBF /* AuthorizationPageNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30CEAF923ED8F0800512EBF /* AuthorizationPageNumber.swift */; };
 		A30CEAFC23ED951800512EBF /* AuthorizationPageVerify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30CEAFB23ED951800512EBF /* AuthorizationPageVerify.swift */; };
 		A30CEAFE23ED960A00512EBF /* AuthorizationPageDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30CEAFD23ED960A00512EBF /* AuthorizationPageDetails.swift */; };
+		A31EB74523F14840001D068B /* VerificationInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31EB74423F14840001D068B /* VerificationInput.swift */; };
 		A332031923E85B5100E6F49D /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A332031823E85B2B00E6F49D /* Montserrat-Light.ttf */; };
 		A332031A23E85B5500E6F49D /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A332031623E85B2B00E6F49D /* Montserrat-Medium.ttf */; };
 		A332031B23E85B5800E6F49D /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A332031723E85B2B00E6F49D /* Montserrat-Regular.ttf */; };
@@ -67,6 +68,7 @@
 		A30CEAF923ED8F0800512EBF /* AuthorizationPageNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPageNumber.swift; sourceTree = "<group>"; };
 		A30CEAFB23ED951800512EBF /* AuthorizationPageVerify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPageVerify.swift; sourceTree = "<group>"; };
 		A30CEAFD23ED960A00512EBF /* AuthorizationPageDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPageDetails.swift; sourceTree = "<group>"; };
+		A31EB74423F14840001D068B /* VerificationInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationInput.swift; sourceTree = "<group>"; };
 		A332031623E85B2B00E6F49D /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		A332031723E85B2B00E6F49D /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		A332031823E85B2B00E6F49D /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				A3C980B423E99FF200468E91 /* PhoneInput.swift */,
+				A31EB74423F14840001D068B /* VerificationInput.swift */,
 			);
 			path = Inputs;
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 				A3C980B523E99FF200468E91 /* PhoneInput.swift in Sources */,
 				A382B6CD23E17FD9008C56D2 /* BaseViewController.swift in Sources */,
 				A30CEAF523ED785900512EBF /* UIImage+UIImageView.swift in Sources */,
+				A31EB74523F14840001D068B /* VerificationInput.swift in Sources */,
 				A30CEAFA23ED8F0800512EBF /* AuthorizationPageNumber.swift in Sources */,
 				A382B6DF23E1985E008C56D2 /* PagerView.swift in Sources */,
 				A332031D23E85BFA00E6F49D /* UIFont.swift in Sources */,

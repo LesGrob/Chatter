@@ -28,7 +28,7 @@ class AuthorizationViewController: BaseViewController {
         let page3 = PageObject(label: "verify", view: AuthorizationPageVerify(changePage: changePage))
         let page4 = PageObject(label: "details", view: AuthorizationPageDetails(changePage: changePage))
         
-        self.pager = PagerView(pages: [page1, page2, page3, page4])
+        self.pager = PagerView(pages: [page3, page1, page2, page4])
         self.pager.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(pager)
         

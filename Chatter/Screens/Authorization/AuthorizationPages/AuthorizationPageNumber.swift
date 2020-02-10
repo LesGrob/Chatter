@@ -65,7 +65,7 @@ class AuthorizationPageNumber: AuthorizationViewPage {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
-        tableView.isUserInteractionEnabled = true
+        tableView.backgroundColor = UIColor.Default.whiteGray
         addSubview(tableView)
         addConstraints([
             tableView.topAnchor.constraint(equalTo: topAnchor),
@@ -76,13 +76,14 @@ class AuthorizationPageNumber: AuthorizationViewPage {
     }
     
     @objc func changePageTap(_ gesture: UIGestureRecognizer){
+        self.endEditing(true)
        changePage?()
     }
 }
 
 extension AuthorizationPageNumber: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

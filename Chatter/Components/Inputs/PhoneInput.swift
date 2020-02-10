@@ -75,6 +75,7 @@ class PhoneInput: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         numberInput.keyboardType = .numberPad
         numberInput.text = ""
         numberInput.textColor = UIColor.Default.black
+        numberInput.delegate = self
         addSubview(numberInput)
         addConstraints([
             numberInput.topAnchor.constraint(equalTo: topAnchor),
@@ -121,5 +122,13 @@ extension PhoneInput {
     
     @objc func dismissPicker() {
         self.endEditing(true)
+    }
+}
+
+extension PhoneInput: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        let newLength = text.count + string.count - range.length
+        return newLength <= 10
     }
 }

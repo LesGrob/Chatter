@@ -45,9 +45,17 @@ class PagerView: UIView {
     public var getCurrentPage: Int { get { return currentPage } }
     public var getPages: [PageObject] { get { return pages } }
     
-    private var slider: UIView!
-    private var slideView: UIView!
-    private var slideBackgroudView: UIView!
+    private var slider: UIView = UIView()
+    private lazy var slideView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.Default.lightBlue
+        return view
+    }()
+    private lazy var slideBackgroudView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.Default.lightGray
+        return view
+    }()
     private var stepViews: [UIView] = []
     private var stepPointViews: [UIView] = []
     private var stepTitles: [UILabel] = []
@@ -70,6 +78,7 @@ class PagerView: UIView {
         self.init()
         self.pages = pages
         self.currentPage = 0
+        addViews()
     }
     
     override func layoutSubviews() {
@@ -77,92 +86,85 @@ class PagerView: UIView {
         setupSliderView()
         setupViews()
     }
-    
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        setupSliderView()
-//        setupViews()
-//    }
-//    
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        setupSliderView()
-//        setupViews()
-//    }
-//    
-//    override func prepareForInterfaceBuilder() {
-//        super.prepareForInterfaceBuilder()
-//        setupSliderView()
-//        setupViews()
-//    }
 }
 
 
 //    MARK:- init style setup
 extension PagerView {
-    private func setupSliderView() {
+    private func addViews() {
         for view in subviews {
             view.removeFromSuperview()
         }
-        
-        self.slideMaxWidth = CGFloat(self.stepPointWidth * CGFloat(pages.count) + self.distanceBetweenPoints * CGFloat(pages.count - 1))
-        
-        self.slider = UIView(frame: CGRect(x: (self.frame.width - slideMaxWidth)/2, y: 24, width: slideMaxWidth, height: (stepPointWidth+labelSize+labelTopMargin)))
         self.addSubview(slider)
-        
-        self.slideBackgroudView = UIView(frame: CGRect(x: 0, y: (slider.frame.height -  slideHeight) / 2, width: slideMaxWidth, height: slideHeight))
-        slideBackgroudView.backgroundColor = UIColor.Default.lightGray
         self.slider.addSubview(slideBackgroudView)
-        
-        self.slideView = UIView(frame: CGRect(x: 0, y: (slider.frame.height -  slideHeight) / 2, width: 0, height: slideHeight))
-        slideView.backgroundColor = UIColor.Default.lightBlue
-        
         self.slider.addSubview(slideView)
         
-        let stepWidth = slideMaxWidth / CGFloat(pages.count - 1)
-        for (index, item) in self.pages.enumerated() {
-            //Main point
-            let pointX = stepWidth * CGFloat(index) - stepPointWidth/2
-            let pointY = (slider.frame.height -  stepPointWidth) / 2
-            let point = UIView(frame: CGRect(x: pointX, y: pointY, width: self.stepPointWidth, height: self.stepPointWidth))
-            
-            point.tag = index
-            point.layer.cornerRadius = self.stepPointWidth / 2
-            point.backgroundColor = index > currentPage ? UIColor.Default.lightGray : UIColor.Default.lightBlue
-            
-            let tap = UITapGestureRecognizer(target: self, action: #selector(self.handlePointTap(_:)))
-            point.addGestureRecognizer(tap)
-            
+        // add points to view
+        for _ in self.pages.enumerated() {
+            let point = UIView()
             self.slider.addSubview(point)
             self.stepViews.append(point)
             
-            // Shadowed point
-            let shPointX = stepWidth * CGFloat(index) - stepShadowedPointWidth/2
-            let shPointY = (slider.frame.height -  stepShadowedPointWidth) / 2
-            let shPoint = UIView(frame: CGRect(x: shPointX, y: shPointY, width: stepShadowedPointWidth, height: stepShadowedPointWidth))
-            
-            shPoint.layer.cornerRadius = stepShadowedPointWidth / 2
-            shPoint.backgroundColor = .white
-            shPoint.dropShadow(shadow: .materialShadow05)
-            shPoint.alpha = index != currentPage ? 0 : 1
-            
+            let shPoint = UIView()
             self.slider.addSubview(shPoint)
             self.stepPointViews.append(shPoint)
             
-            // Item label
-            let itemFrame = item.label.boundingRect(font: .customFont(ofSize: labelSize, weight: .light), countLine: 1)
-            let labelWidth = (itemFrame.width > 50 ? 50 : itemFrame.width) + 8.0
-            let labelY = point.frame.maxY + labelTopMargin
-            let labelX = stepWidth * CGFloat(index) - labelWidth/2
-            let label = UILabel(frame: CGRect(x: labelX, y: labelY , width: labelWidth, height: labelSize + 2))
-            
-            label.text = item.label
-            label.textAlignment = .center
-            label.textColor = UIColor.Default.lightGray
-            label.font = .customFont(ofSize: labelSize, weight: .light)
-            
+            let label = UILabel()
             self.slider.addSubview(label)
             self.stepTitles.append(label)
+        }
+        
+        layoutIfNeeded()
+    }
+    
+    private func setupSliderView() {
+        self.slideMaxWidth = CGFloat(self.stepPointWidth * CGFloat(pages.count) + self.distanceBetweenPoints * CGFloat(pages.count - 1))
+        
+        self.slider.frame = CGRect(x: (self.frame.width - slideMaxWidth)/2, y: 24, width: slideMaxWidth, height: (stepPointWidth+labelSize+labelTopMargin))
+        self.slideBackgroudView.frame = CGRect(x: 0, y: (slider.frame.height -  slideHeight) / 2, width: slideMaxWidth, height: slideHeight)
+        self.slideView.frame = CGRect(x: 0, y: (slider.frame.height -  slideHeight) / 2, width: 0, height: slideHeight)
+        
+        let stepWidth = slideMaxWidth / CGFloat(pages.count - 1)
+        
+        //Main point
+        for (index, item) in self.stepViews.enumerated() {
+            let pointX = stepWidth * CGFloat(index) - stepPointWidth/2
+            let pointY = (slider.frame.height -  stepPointWidth) / 2
+            item.frame = CGRect(x: pointX, y: pointY, width: self.stepPointWidth, height: self.stepPointWidth)
+            
+            item.tag = index
+            item.layer.cornerRadius = self.stepPointWidth / 2
+            item.backgroundColor = index > currentPage ? UIColor.Default.lightGray : UIColor.Default.lightBlue
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.handlePointTap(_:)))
+            item.addGestureRecognizer(tap)
+        }
+        
+        // Shadowed point
+        for (index, item) in self.stepPointViews.enumerated() {
+            let shPointX = stepWidth * CGFloat(index) - stepShadowedPointWidth/2
+            let shPointY = (slider.frame.height -  stepShadowedPointWidth) / 2
+            item.frame = CGRect(x: shPointX, y: shPointY, width: stepShadowedPointWidth, height: stepShadowedPointWidth)
+            
+            item.layer.cornerRadius = stepShadowedPointWidth / 2
+            item.backgroundColor = .white
+            item.dropShadow(shadow: .materialShadow05)
+            item.alpha = index != currentPage ? 0 : 1
+        }
+        
+        // Item label
+        for (index, item) in self.stepTitles.enumerated() {
+            let page = self.pages[index]
+            let itemFrame = page.label.boundingRect(font: .customFont(ofSize: labelSize, weight: .light), countLine: 1)
+            let labelWidth = (itemFrame.width > 50 ? 50 : itemFrame.width) + 8.0
+            let labelY = self.stepViews[index].frame.maxY + labelTopMargin
+            let labelX = stepWidth * CGFloat(index) - labelWidth/2
+            item.frame = CGRect(x: labelX, y: labelY , width: labelWidth, height: labelSize + 2)
+            
+            item.text = page.label
+            item.textAlignment = .center
+            item.textColor = UIColor.Default.lightGray
+            item.font = .customFont(ofSize: labelSize, weight: .light)
         }
     }
     
