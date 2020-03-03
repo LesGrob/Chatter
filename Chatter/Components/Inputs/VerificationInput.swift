@@ -10,6 +10,7 @@ import UIKit
 
 @IBDesignable
 class VerificationInput: UIControl, UIKeyInput {
+    public static var height: CGFloat { return NumberView.height }
     //    MARK:- custom properties
     public var text: String { get { return String(characters) } }
     private var characters: [Character] = []
@@ -31,12 +32,14 @@ class VerificationInput: UIControl, UIKeyInput {
         view.alignment = .center
         view.distribution = .fill
         view.spacing = spacing
+        let tap = UITapGestureRecognizer(target: self, action: #selector(onStackTap))
+        view.addGestureRecognizer(tap)
+
         return view
     }()
     
-    private let gesture = UITapGestureRecognizer(target: self, action: #selector(stackTouched(_:)))
-    @objc func stackTouched(_ gesture: UIGestureRecognizer) {
-        print("wewwef")
+    @objc func onStackTap(_ sender: UIGestureRecognizer){
+        becomeFirstResponder()
     }
     
     //    MARK:- overrides
@@ -88,7 +91,6 @@ extension VerificationInput {
             let number = NumberView()
             number.tag = i
             number.translatesAutoresizingMaskIntoConstraints = false
-            number.addGestureRecognizer(gesture)
             numbersStack.addArrangedSubview(number)
             numbersStack.addConstraints([
                 number.heightAnchor.constraint(equalTo: numbersStack.heightAnchor),
@@ -199,6 +201,6 @@ fileprivate class NumberView: UIView {
     }
     
     private func setupViews() {
-        label.text = key
+        label.text = key.isEmpty ? "*" : key
     }
 }

@@ -83,8 +83,10 @@ class PagerView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        setupSliderView()
-        setupViews()
+        if slider.frame == .zero {
+            setupSliderView()
+            setupViews()
+        }
     }
 }
 
@@ -113,16 +115,16 @@ extension PagerView {
             self.slider.addSubview(label)
             self.stepTitles.append(label)
         }
-        
-        layoutIfNeeded()
     }
     
     private func setupSliderView() {
         self.slideMaxWidth = CGFloat(self.stepPointWidth * CGFloat(pages.count) + self.distanceBetweenPoints * CGFloat(pages.count - 1))
         
+        let currentWidth = self.slideMaxWidth * (CGFloat(currentPage) / CGFloat(pages.count - 1))
+        
         self.slider.frame = CGRect(x: (self.frame.width - slideMaxWidth)/2, y: 24, width: slideMaxWidth, height: (stepPointWidth+labelSize+labelTopMargin))
         self.slideBackgroudView.frame = CGRect(x: 0, y: (slider.frame.height -  slideHeight) / 2, width: slideMaxWidth, height: slideHeight)
-        self.slideView.frame = CGRect(x: 0, y: (slider.frame.height -  slideHeight) / 2, width: 0, height: slideHeight)
+        self.slideView.frame = CGRect(x: 0, y: (slider.frame.height -  slideHeight) / 2, width: currentWidth, height: slideHeight)
         
         let stepWidth = slideMaxWidth / CGFloat(pages.count - 1)
         
@@ -168,11 +170,11 @@ extension PagerView {
         }
     }
     
-    private func setupViews(){
+    private func setupViews() {
         self.viewsTopMargin =  slider.frame.maxY + 24
         
         for (index, item) in pages.enumerated() {
-            let x  = index == 0 ? 0 : self.frame.width
+            let x = index == currentPage ? 0 : self.frame.width
             item.view.frame = CGRect(x: x, y: self.viewsTopMargin, width: self.frame.width, height: (self.frame.height - viewsTopMargin))
             item.view.alpha = index == 0 ? 1 : 0
             addSubview(item.view)

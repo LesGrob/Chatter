@@ -41,7 +41,7 @@ class PhoneInput: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         zoneInput.translatesAutoresizingMaskIntoConstraints = false
         zoneInput.font = .customFont(ofSize: 16, weight: .light)
         zoneInput.text = self.zones[0]
-        zoneInput.textColor = UIColor.Default.black
+        zoneInput.textColor = UIColor.Default.textBlack
         
         let arrowImg = UIImage.resize(image: UIImage(named: "arrow_down"), targetSize: CGSize(width: 9, height: 9))
         let arrow = UIImageView(image: arrowImg)
@@ -74,7 +74,7 @@ class PhoneInput: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         numberInput.font = .customFont(ofSize: 16, weight: .light)
         numberInput.keyboardType = .numberPad
         numberInput.text = ""
-        numberInput.textColor = UIColor.Default.black
+        numberInput.textColor = UIColor.Default.textBlack
         numberInput.delegate = self
         addSubview(numberInput)
         addConstraints([

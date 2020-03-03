@@ -9,6 +9,11 @@
 import UIKit
 
 class AuthorizationPageNumber: AuthorizationViewPage {
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     private let tableView: UITableView = {
         let view = UITableView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -148,10 +153,10 @@ extension AuthorizationPageNumber {
             let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let isKeyboardShowing = notification.name == UIResponder.keyboardWillShowNotification
             let height = isKeyboardShowing ? keyboardFrame.height : 0
-            
+
             tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: height, right: 0)
-            
-            UIView.animate(withDuration: 0, delay: 0, options: .curveEaseOut, animations: {
+
+            UIView.animate(withDuration: 0.1, delay: 0.1, options: .curveEaseOut, animations: {
                 self.layoutIfNeeded()
             }, completion: { _ in })
         }

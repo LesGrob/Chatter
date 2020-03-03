@@ -11,6 +11,7 @@ import UIKit
 extension UIColor {
     struct Default {
         static let black = UIColor(rgb: 0x21262A)
+        static let textBlack = UIColor(rgb: 0x595B64)
         static let whiteGray = UIColor(rgb: 0xF7F7F7)
         static let lightGray = UIColor(rgb: 0xAFBDCE)
         static let backgroundLightGray = UIColor(rgb: 0xE9E9E9)

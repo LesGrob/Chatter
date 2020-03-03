@@ -9,6 +9,11 @@
 import UIKit
 
 class AuthorizationPageVerify: AuthorizationViewPage {
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     private let tableView: UITableView = {
         let view = UITableView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -65,6 +70,7 @@ class AuthorizationPageVerify: AuthorizationViewPage {
     }
     
     @objc func changePageTap(_ gesture: UIGestureRecognizer){
+        self.endEditing(true)
         changePage?()
     }
 }
@@ -91,6 +97,7 @@ extension AuthorizationPageVerify: UITableViewDataSource, UITableViewDelegate {
             button.heightAnchor.constraint(equalToConstant: 50),
         ])
         cell.addConstraints([
+            verification.heightAnchor.constraint(equalToConstant: VerificationInput.height),
             verification.bottomAnchor.constraint(lessThanOrEqualTo: button.topAnchor, constant: -24),
             verification.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
             verification.trailingAnchor.constraint(equalTo: cell.trailingAnchor)
@@ -108,8 +115,6 @@ extension AuthorizationPageVerify: UITableViewDataSource, UITableViewDelegate {
             image.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
             image.heightAnchor.constraint(lessThanOrEqualTo: image.widthAnchor)
         ])
-        
-        verification.becomeFirstResponder()
         
         return cell
     }
@@ -133,9 +138,11 @@ extension AuthorizationPageVerify {
             
             tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: height, right: 0)
             
-            UIView.animate(withDuration: 0, delay: 0, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.1, delay: 0.1, options: .curveEaseOut, animations: {
                 self.layoutIfNeeded()
-            }, completion: { _ in })
+            }, completion: { _ in
+                self.tableView.scrollRectToVisible(self.verification.frame, animated: true)
+            })
         }
     }
 }
