@@ -17,15 +17,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         let view1 = UIViewController()
-        view1.view.backgroundColor = .systemPink
-        let item1 = SideMenuItem(icon: UIImage(named: "ic_rounded_plus"), title: "Adoption", viewController: view1)
+        view1.view.backgroundColor = .blue
+        let item1 = SideMenuItem(icon: UIImage(named: "ic_rounded_plus"), title: "blue", viewController: view1)
         
         let view2 = UIViewController()
-        view2.view.backgroundColor = .systemPink
-        let item2 = SideMenuItem(icon: UIImage(named: "ic_rounded_plus"), title: "Danation", viewController: view2)
+        view2.view.backgroundColor = .green
+        let item2 = SideMenuItem(icon: UIImage(named: "ic_rounded_plus"), title: "green", viewController: view2)
+        
+        let view3 = UIViewController()
+        view3.view.backgroundColor = .yellow
+        let item3 = SideMenuItem(icon: UIImage(named: "ic_rounded_plus"), title: "yellow", viewController: view3)
+        
+        let view4 = UIViewController()
+        view4.view.backgroundColor = .cyan
+        let item4 = SideMenuItem(icon: UIImage(named: "ic_rounded_plus"), title: "cyan", viewController: view4)
         
         
-        let contr = SideMenu(items: [item1, item2])//AuthorizationViewController()
+        let contr = SideMenu(items: [item1, item2, item3, item4])//AuthorizationViewController()
         
         window?.rootViewController = contr
         window!.makeKeyAndVisible()

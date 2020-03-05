@@ -181,7 +181,7 @@ extension PagerView {
         }
     }
     
-    @objc  func handlePointTap(_ gesture: UIGestureRecognizer){
+    @objc func handlePointTap(_ gesture: UIGestureRecognizer){
         guard let point = gesture.view, point.tag < self.currentPage else  {
             return
         }

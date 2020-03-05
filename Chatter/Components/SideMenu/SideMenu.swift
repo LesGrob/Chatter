@@ -9,11 +9,11 @@
 import UIKit
 
 class SideMenu: UIViewController {
-    var menuItems: [SideMenuItem] = []
+    private var menuItems: [SideMenuItem] = []
     var items: [SideMenuItem] { get { return menuItems } }
     
-    private var selectedItem: Int? = nil
-    private var previousItem: Int? = nil
+    private var menuPath: SideMenuPath = SideMenuPath()
+    var path: SideMenuPath { get { return self.menuPath } }
     
     private var decorator: SideMenuDecorator!
     
@@ -31,12 +31,17 @@ class SideMenu: UIViewController {
         decorator = SideMenuDecorator(controller: self)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        selectItem(index: 0)
+    }
+    
     public func selectItem(index: Int) {
-        guard index > 0, index < menuItems.count else { return }
+        guard index >= 0, index < menuItems.count, index != menuPath.selectedIndex else { return }
         
-        previousItem = selectedItem
-        selectedItem = index
+        menuPath.previousIndex = path.selectedIndex
+        menuPath.selectedIndex = index
         
-        decorator.drawControllers()
+        decorator.drawControllers(path: menuPath)
     }
 }

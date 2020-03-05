@@ -8,6 +8,18 @@
 
 import UIKit
 
+class SideMenuPath {
+    var previousIndex: Int? = nil
+    var selectedIndex: Int? = nil
+    
+    init(){}
+    
+    init(previousIndex: Int?, selectedIndex: Int?){
+        self.previousIndex = previousIndex
+        self.selectedIndex = selectedIndex
+    }
+}
+
 class SideMenuItem {
     var icon: UIImage?
     var title: String
@@ -60,5 +72,10 @@ class SideMenuItemCell: UIView {
     func setData(item: SideMenuItem){
         self.title.text = item.title
         self.icon.image = item.icon?.withRenderingMode(.alwaysTemplate)
+    }
+    
+    func select(_ select: Bool){
+        icon.tintColor = select ? UIColor.white : UIColor(rgb: 0x87ABAA)
+        title.textColor = select ? UIColor.white : UIColor(rgb: 0x87ABAA)
     }
 }

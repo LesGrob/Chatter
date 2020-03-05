@@ -11,6 +11,23 @@ import UIKit
 class SideMenuDecorator {
     private var controller: SideMenu!
     
+    private var itemViewFullSize: CGSize { return controller.view.frame.size }
+    private var itemViewMediumSize: CGSize {
+        let height = itemViewFullSize.height - 200
+        return CGSize(width: itemViewFullSize.width * height/itemViewFullSize.height, height: height)
+    }
+    private var itemViewSmallSize: CGSize {
+        return CGSize(width: itemViewMediumSize.width*0.858, height: itemViewMediumSize.height*0.858)
+    }
+    
+    private var itemListHeight: CGFloat {
+        get {
+            let maxListHeight = controller.view.frame.height - 200
+            let listHeight = CGFloat(controller.items.count * 52)
+            return listHeight > maxListHeight ? maxListHeight : listHeight
+        }
+    }
+    
 //    MARK:- top view
     private var topView: UIView = {
         let view = UIView()
@@ -54,14 +71,7 @@ class SideMenuDecorator {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-//    MARK:- view controllers
-    private var controllersView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemPink
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+//    private var itemListCells:
     
     //    MARK:- bottom view
     private var bottomView: UIView = {
@@ -72,7 +82,6 @@ class SideMenuDecorator {
         return view
     }()
     
-    
     init(controller: SideMenu) {
         self.controller = controller
         self.controller.view.backgroundColor = UIColor(rgb: 0x3B6060)
@@ -80,12 +89,19 @@ class SideMenuDecorator {
         setupConstraints()
         setupData()
     }
-    
+}
+
+extension SideMenuDecorator {
     private func setupData(){
-        for item in controller.items {
+        for (index, item) in controller.items.enumerated() {
             let itemView = SideMenuItemCell()
+            itemView.tag = index
             itemView.setData(item: item)
+//            itemView.select(index )
             itemView.translatesAutoresizingMaskIntoConstraints = false
+            
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(didSelectView(_:)))
+            itemView.addGestureRecognizer(gesture)
             
             itemList.addArrangedSubview(itemView)
             itemList.addConstraints([
@@ -93,6 +109,11 @@ class SideMenuDecorator {
                 itemView.leadingAnchor.constraint(equalTo: itemList.leadingAnchor),
                 itemView.trailingAnchor.constraint(equalTo: itemList.trailingAnchor),
             ])
+            
+            item.viewController.view.frame = CGRect(x: itemViewFullSize.width, y: 0, width: itemViewFullSize.width, height: itemViewFullSize.height)
+            item.viewController.view.clipsToBounds = true
+            item.viewController.view.layer.cornerRadius = 20
+            controller.view.addSubview(item.viewController.view)
         }
     }
     
@@ -104,12 +125,10 @@ class SideMenuDecorator {
         
         controller.view.addSubview(itemList)
         
-        controller.view.addSubview(controllersView)
-        
         controller.view.addSubview(bottomView)
     }
     
-    private func setupConstraints(){
+    private func setupConstraints() {
         //top view
         controller.view.addConstraints([
             topView.topAnchor.constraint(equalTo: controller.view.topAnchor, constant: 40),
@@ -135,22 +154,11 @@ class SideMenuDecorator {
         ])
         
         //stack view
-        let maxListHeight = controller.view.frame.height - 200
-        let listHeight = CGFloat(controller.items.count * 52)
-        let itemListHeight: CGFloat = listHeight > maxListHeight ? maxListHeight : listHeight
         controller.view.addConstraints([
             itemList.heightAnchor.constraint(equalToConstant: itemListHeight),
             itemList.centerYAnchor.constraint(equalTo: controller.view.safeAreaLayoutGuide.centerYAnchor),
             itemList.leadingAnchor.constraint(equalTo: controller.view.leadingAnchor),
-            itemList.widthAnchor.constraint(equalTo: controller.view.widthAnchor, multiplier: 0.6)
-        ])
-        
-        //controllers view
-        controller.view.addConstraints([
-            controllersView.bottomAnchor.constraint(equalTo: bottomView.topAnchor),
-            controllersView.topAnchor.constraint(equalTo: topView.bottomAnchor),
-            controllersView.trailingAnchor.constraint(equalTo: controller.view.trailingAnchor),
-            controllersView.leadingAnchor.constraint(equalTo: itemList.trailingAnchor)
+            itemList.widthAnchor.constraint(equalTo: controller.view.widthAnchor, multiplier: 0.615)
         ])
         
         //bottom view
@@ -164,7 +172,56 @@ class SideMenuDecorator {
 }
 
 extension SideMenuDecorator {
-    func drawControllers() {
+    @objc func didSelectView(_ gestureRecognizer: UIGestureRecognizer) {
+        guard let index = gestureRecognizer.view?.tag, index >= 0 && index < controller.items.count else { return }
         
+        controller.selectItem(index: index)
+    }
+    
+    func drawControllers(path: SideMenuPath) {
+        guard validPath(path: path) else { return }
+        
+        UIView.animate(withDuration: 0.4, delay: 0.1, options: .curveEaseIn, animations: {
+            for (index, item) in self.controller.items.enumerated() {
+                guard index != path.previousIndex && index != path.selectedIndex else { continue }
+                let y = (self.itemViewFullSize.height - self.itemViewSmallSize.height)/2
+                item.viewController.view.frame = CGRect(x: self.itemViewFullSize.width, y: y, width: self.itemViewSmallSize.width, height: self.itemViewSmallSize.height)
+                
+                item.viewController.view.layer.zPosition = 0
+                item.viewController.view.alpha = 0
+            }
+            
+            if let previousIndex = path.previousIndex {
+                let x = self.itemViewFullSize.width * 0.615
+                let y = (self.itemViewFullSize.height - self.itemViewSmallSize.height)/2
+                self.controller.items[previousIndex].viewController.view.frame = CGRect(x: x, y: y, width: self.itemViewSmallSize.width, height: self.itemViewSmallSize.height)
+                
+                self.controller.items[previousIndex].viewController.view.layer.zPosition = 0
+                self.controller.items[previousIndex].viewController.view.alpha = 0.5
+            }
+            
+            if let selectedIndex = path.selectedIndex {
+                let x = self.itemViewFullSize.width * 0.69
+                let y = (self.itemViewFullSize.height - self.itemViewMediumSize.height)/2
+                self.controller.items[selectedIndex].viewController.view.frame = CGRect(x: x, y: y, width: self.itemViewMediumSize.width, height: self.itemViewMediumSize.height)
+                
+                self.controller.items[selectedIndex].viewController.view.layer.zPosition = 1
+                self.controller.items[selectedIndex].viewController.view.alpha = 1
+            }
+            
+            self.drawItemList()
+        }, completion: nil)
+    }
+    
+    private func drawItemList() {
+        for (index, item) in self.itemList.subviews.enumerated() {
+            guard let view = item as? SideMenuItemCell else { continue }
+            view.select(index == controller.path.selectedIndex)
+        }
+    }
+    
+    private func validPath(path: SideMenuPath) -> Bool {
+        return (path.previousIndex == nil || (path.previousIndex! >= 0 && path.previousIndex! < controller.items.count)) &&
+            (path.selectedIndex == nil || (path.selectedIndex! >= 0 && path.selectedIndex! < controller.items.count))
     }
 }
