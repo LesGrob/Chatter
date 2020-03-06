@@ -8,6 +8,17 @@
 
 import UIKit
 
+
+enum SideMenuState {
+    case menu
+    case controller
+}
+
+protocol SideMenuDelegate {
+    func togglePanel()
+    func collapsePanel()
+}
+
 class SideMenuDecorator {
     private var controller: SideMenu!
     
@@ -28,7 +39,11 @@ class SideMenuDecorator {
         }
     }
     
-//    MARK:- top view
+    private var controllerRadius: CGFloat = 20
+    
+    private var menuState: SideMenuState = .menu
+    
+    //    MARK:- top view
     private var topView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 6
@@ -64,14 +79,14 @@ class SideMenuDecorator {
         return view
     }()
     
-//    MARK:- list of items
+    //    MARK:- list of items
     private var itemList: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-//    private var itemListCells:
+    //    private var itemListCells:
     
     //    MARK:- bottom view
     private var bottomView: UIView = {
@@ -85,22 +100,23 @@ class SideMenuDecorator {
     init(controller: SideMenu) {
         self.controller = controller
         self.controller.view.backgroundColor = UIColor(rgb: 0x3B6060)
+        
         setupViews()
         setupConstraints()
         setupData()
     }
 }
 
+//  MARK:- setup
 extension SideMenuDecorator {
-    private func setupData(){
+    private func setupData() {
         for (index, item) in controller.items.enumerated() {
             let itemView = SideMenuItemCell()
             itemView.tag = index
             itemView.setData(item: item)
-//            itemView.select(index )
             itemView.translatesAutoresizingMaskIntoConstraints = false
             
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(didSelectView(_:)))
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(didSelectMenuItemView))
             itemView.addGestureRecognizer(gesture)
             
             itemList.addArrangedSubview(itemView)
@@ -110,10 +126,18 @@ extension SideMenuDecorator {
                 itemView.trailingAnchor.constraint(equalTo: itemList.trailingAnchor),
             ])
             
+            item.viewController.view.tag = index
             item.viewController.view.frame = CGRect(x: itemViewFullSize.width, y: 0, width: itemViewFullSize.width, height: itemViewFullSize.height)
             item.viewController.view.clipsToBounds = true
-            item.viewController.view.layer.cornerRadius = 20
+            item.viewController.view.layer.cornerRadius = controllerRadius
             controller.view.addSubview(item.viewController.view)
+            controller.addChild(item.viewController)
+            
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didSelectControllerView(_:)))
+            let slideGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(slideController(_:)))
+            
+            item.viewController.view.addGestureRecognizer(tapGesture)
+            item.viewController.view.addGestureRecognizer(slideGestureRecognizer)
         }
     }
     
@@ -171,45 +195,47 @@ extension SideMenuDecorator {
     }
 }
 
+//  MARK:- menu drawing functions
 extension SideMenuDecorator {
-    @objc func didSelectView(_ gestureRecognizer: UIGestureRecognizer) {
+    @objc func didSelectMenuItemView(_ gestureRecognizer: UIGestureRecognizer) {
         guard let index = gestureRecognizer.view?.tag, index >= 0 && index < controller.items.count else { return }
         
         controller.selectItem(index: index)
     }
     
-    func drawControllers(path: SideMenuPath) {
+    func drawMenu(for path: SideMenuPath) {
         guard validPath(path: path) else { return }
         
-        UIView.animate(withDuration: 0.4, delay: 0.1, options: .curveEaseIn, animations: {
-            for (index, item) in self.controller.items.enumerated() {
-                guard index != path.previousIndex && index != path.selectedIndex else { continue }
-                let y = (self.itemViewFullSize.height - self.itemViewSmallSize.height)/2
-                item.viewController.view.frame = CGRect(x: self.itemViewFullSize.width, y: y, width: self.itemViewSmallSize.width, height: self.itemViewSmallSize.height)
-                
-                item.viewController.view.layer.zPosition = 0
-                item.viewController.view.alpha = 0
-            }
-            
-            if let previousIndex = path.previousIndex {
-                let x = self.itemViewFullSize.width * 0.615
-                let y = (self.itemViewFullSize.height - self.itemViewSmallSize.height)/2
-                self.controller.items[previousIndex].viewController.view.frame = CGRect(x: x, y: y, width: self.itemViewSmallSize.width, height: self.itemViewSmallSize.height)
-                
-                self.controller.items[previousIndex].viewController.view.layer.zPosition = 0
-                self.controller.items[previousIndex].viewController.view.alpha = 0.5
-            }
-            
-            if let selectedIndex = path.selectedIndex {
-                let x = self.itemViewFullSize.width * 0.69
-                let y = (self.itemViewFullSize.height - self.itemViewMediumSize.height)/2
-                self.controller.items[selectedIndex].viewController.view.frame = CGRect(x: x, y: y, width: self.itemViewMediumSize.width, height: self.itemViewMediumSize.height)
-                
-                self.controller.items[selectedIndex].viewController.view.layer.zPosition = 1
-                self.controller.items[selectedIndex].viewController.view.alpha = 1
-            }
-            
-            self.drawItemList()
+//        setGestureRecognizers(for: path)
+        UIView.animate(withDuration: 0.5, delay: 0.1,
+                       usingSpringWithDamping: 0.8,
+                       initialSpringVelocity: 0,
+                       options: .curveEaseInOut,
+                       animations: {
+                        for (index, item) in self.controller.items.enumerated() {
+                            guard index != path.previousIndex && index != path.selectedIndex else { continue }
+                            let y = (self.itemViewFullSize.height - self.itemViewSmallSize.height)/2
+                            item.viewController.view.frame = CGRect(x: self.itemViewFullSize.width, y: y, width: self.itemViewSmallSize.width, height: self.itemViewSmallSize.height)
+                            
+                            item.viewController.view.alpha = 0
+                        }
+                        
+                        if let previousIndex = path.previousIndex {
+                            let x = self.itemViewFullSize.width * 0.615
+                            let y = (self.itemViewFullSize.height - self.itemViewSmallSize.height)/2
+                            self.controller.items[previousIndex].viewController.view.frame = CGRect(x: x, y: y, width: self.itemViewSmallSize.width, height: self.itemViewSmallSize.height)
+                            self.controller.items[previousIndex].viewController.view.alpha = 0.5
+                        }
+                        
+                        if let selectedIndex = path.selectedIndex {
+                            let x = self.itemViewFullSize.width * 0.69
+                            let y = (self.itemViewFullSize.height - self.itemViewMediumSize.height)/2
+                            self.controller.items[selectedIndex].viewController.view.frame = CGRect(x: x, y: y, width: self.itemViewMediumSize.width, height: self.itemViewMediumSize.height)
+                             self.controller.view.bringSubviewToFront(self.controller.items[selectedIndex].viewController.view)
+                            self.controller.items[selectedIndex].viewController.view.alpha = 1
+                        }
+                        
+                        self.drawItemList()
         }, completion: nil)
     }
     
@@ -223,5 +249,102 @@ extension SideMenuDecorator {
     private func validPath(path: SideMenuPath) -> Bool {
         return (path.previousIndex == nil || (path.previousIndex! >= 0 && path.previousIndex! < controller.items.count)) &&
             (path.selectedIndex == nil || (path.selectedIndex! >= 0 && path.selectedIndex! < controller.items.count))
+    }
+}
+
+
+//  MARK:- controller drawing functions
+extension SideMenuDecorator {
+    @objc func didSelectControllerView(_ gestureRecognizer: UIGestureRecognizer) {
+        guard let index = gestureRecognizer.view?.tag, index == controller.path.selectedIndex else { return }
+        expandController()
+    }
+    
+    @objc func slideController(_ recognizer: UIPanGestureRecognizer) {
+        guard let index = recognizer.view?.tag, index == controller.path.selectedIndex else { return }
+        
+        let gestureIsDraggingFromLeftToRight = (recognizer.velocity(in: self.controller.view).x > 0)
+        
+        switch recognizer.state {
+        case .began:
+            if !gestureIsDraggingFromLeftToRight && menuState == .controller { return }
+            else if gestureIsDraggingFromLeftToRight && menuState == .menu { return }
+        case .changed:
+            guard let rview = recognizer.view else { return }
+            let tapX = recognizer.translation(in: controller.view).x / 8
+            
+            let newHeight =  rview.frame.height - tapX
+            let newWidth = rview.frame.width * newHeight/rview.frame.height
+            
+            let newX = (rview.center.x + tapX) - newWidth/2
+            let newY = controller.view.center.y - newHeight/2
+            
+            if newX < 0 {
+                self.expandController()
+                return
+            }
+            if newX > (self.itemViewFullSize.width * 0.69) {
+                self.collapseController()
+                return
+            }
+            
+            rview.frame = CGRect(
+                x: newX,
+                y: newY,
+                width: newWidth,
+                height: newHeight)
+            
+            rview.layer.cornerRadius = newX/(self.itemViewFullSize.width * 0.69) * controllerRadius
+        case .ended:
+            if let rview = recognizer.view {
+                if menuState == .controller {
+                    if rview.frame.minX > self.controller.view.frame.width/4 {
+                        self.collapseController()
+                    } else {
+                        self.expandController()
+                    }
+                } else {
+                    if rview.frame.minX < self.controller.view.frame.width/2 {
+                        self.expandController()
+                    } else {
+                        self.collapseController()
+                    }
+                }
+            }
+        default:
+            break
+        }
+    }
+    
+    private func expandController() {
+        guard let index = controller.path.selectedIndex else { return }
+        
+        UIView.animate(withDuration: 0.5, delay: 0.1,
+                       usingSpringWithDamping: 0.8,
+                       initialSpringVelocity: 0,
+                       options: .curveEaseInOut,
+                       animations: {
+                        self.controller.items[index].viewController.view.frame = CGRect(x: 0, y: 0, width: self.itemViewFullSize.width, height: self.itemViewFullSize.height)
+                        self.controller.items[index].viewController.view.layer.cornerRadius = 0
+        }, completion: { _ in
+            self.menuState = .controller
+        })
+    }
+    
+    private func collapseController() {
+        guard let index = controller.path.selectedIndex else { return }
+        
+        UIView.animate(withDuration: 0.5, delay: 0.1,
+                       usingSpringWithDamping: 0.8,
+                       initialSpringVelocity: 0,
+                       options: .curveEaseInOut,
+                       animations: {
+                        let x = self.itemViewFullSize.width * 0.69
+                        let y = (self.itemViewFullSize.height - self.itemViewMediumSize.height)/2
+                        self.controller.items[index].viewController.view.frame = CGRect(x: x, y: y, width: self.itemViewMediumSize.width, height: self.itemViewMediumSize.height)
+                        self.controller.items[index].viewController.view.layer.cornerRadius = self.controllerRadius
+        }, completion: { _ in
+            self.menuState = .menu
+        })
     }
 }

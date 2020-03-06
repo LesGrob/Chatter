@@ -23,9 +23,9 @@ class SideMenuPath {
 class SideMenuItem {
     var icon: UIImage?
     var title: String
-    var viewController: UIViewController
+    var viewController: SideMenuItemController
     
-    init(icon: UIImage?, title: String, viewController: UIViewController) {
+    init(icon: UIImage?, title: String, viewController: SideMenuItemController) {
         self.icon = icon
         self.title = title
         self.viewController = viewController
@@ -48,7 +48,7 @@ class SideMenuItemCell: UIView {
         return view
     }()
     
-    override init(frame: CGRect){
+    override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(icon)
         self.addSubview(title)
@@ -69,12 +69,12 @@ class SideMenuItemCell: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setData(item: SideMenuItem){
+    func setData(item: SideMenuItem) {
         self.title.text = item.title
         self.icon.image = item.icon?.withRenderingMode(.alwaysTemplate)
     }
     
-    func select(_ select: Bool){
+    func select(_ select: Bool) {
         icon.tintColor = select ? UIColor.white : UIColor(rgb: 0x87ABAA)
         title.textColor = select ? UIColor.white : UIColor(rgb: 0x87ABAA)
     }

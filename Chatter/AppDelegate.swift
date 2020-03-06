@@ -16,19 +16,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         
         
-        let view1 = UIViewController()
+        let view1 = SideMenuItemController()
         view1.view.backgroundColor = .blue
         let item1 = SideMenuItem(icon: UIImage(named: "ic_rounded_plus"), title: "blue", viewController: view1)
         
-        let view2 = UIViewController()
+        let view2 = SideMenuItemController()
         view2.view.backgroundColor = .green
         let item2 = SideMenuItem(icon: UIImage(named: "ic_rounded_plus"), title: "green", viewController: view2)
         
-        let view3 = UIViewController()
+        let view3 = SideMenuItemController()
         view3.view.backgroundColor = .yellow
         let item3 = SideMenuItem(icon: UIImage(named: "ic_rounded_plus"), title: "yellow", viewController: view3)
         
-        let view4 = UIViewController()
+        let view4 = SideMenuItemController()
         view4.view.backgroundColor = .cyan
         let item4 = SideMenuItem(icon: UIImage(named: "ic_rounded_plus"), title: "cyan", viewController: view4)
         

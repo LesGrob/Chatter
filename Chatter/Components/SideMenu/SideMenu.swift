@@ -42,6 +42,6 @@ class SideMenu: UIViewController {
         menuPath.previousIndex = path.selectedIndex
         menuPath.selectedIndex = index
         
-        decorator.drawControllers(path: menuPath)
+        decorator.drawMenu(for: menuPath)
     }
 }

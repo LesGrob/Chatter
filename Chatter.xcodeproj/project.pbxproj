@@ -36,6 +36,7 @@
 		A382B6DB23E189A3008C56D2 /* DesignPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = A382B6DA23E189A3008C56D2 /* DesignPattern.swift */; };
 		A382B6DF23E1985E008C56D2 /* PagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A382B6DE23E1985E008C56D2 /* PagerView.swift */; };
 		A382B6E223E1A46A008C56D2 /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A382B6E123E1A46A008C56D2 /* Shadow.swift */; };
+		A38E73392412306200D3F758 /* SideMenuItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E73382412306200D3F758 /* SideMenuItemController.swift */; };
 		A3C980B223E95FAE00468E91 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C980B123E95FAE00468E91 /* RoundedButton.swift */; };
 		A3C980B523E99FF200468E91 /* PhoneInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C980B423E99FF200468E91 /* PhoneInput.swift */; };
 		A3CAA65623F2C441002CC3EB /* CustomTextInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CAA65523F2C441002CC3EB /* CustomTextInputs.swift */; };
@@ -100,6 +101,7 @@
 		A382B6DA23E189A3008C56D2 /* DesignPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignPattern.swift; sourceTree = "<group>"; };
 		A382B6DE23E1985E008C56D2 /* PagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagerView.swift; sourceTree = "<group>"; };
 		A382B6E123E1A46A008C56D2 /* Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
+		A38E73382412306200D3F758 /* SideMenuItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuItemController.swift; sourceTree = "<group>"; };
 		A3C980B123E95FAE00468E91 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		A3C980B423E99FF200468E91 /* PhoneInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInput.swift; sourceTree = "<group>"; };
 		A3CAA65523F2C441002CC3EB /* CustomTextInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextInputs.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				A33A18CF240E790F00887420 /* SideMenuItem.swift */,
 				A33A18CA240E721E00887420 /* SideMenu.swift */,
 				A33A18CD240E789800887420 /* SideMenuDecorator.swift */,
+				A38E73382412306200D3F758 /* SideMenuItemController.swift */,
 			);
 			path = SideMenu;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				A382B6E223E1A46A008C56D2 /* Shadow.swift in Sources */,
 				A3C980B223E95FAE00468E91 /* RoundedButton.swift in Sources */,
 				A382B6DB23E189A3008C56D2 /* DesignPattern.swift in Sources */,
+				A38E73392412306200D3F758 /* SideMenuItemController.swift in Sources */,
 				A30CEAF823ED8BDE00512EBF /* AuthorizationPageStart.swift in Sources */,
 				A30CEAFC23ED951800512EBF /* AuthorizationPageVerify.swift in Sources */,
 				A33A18CE240E789800887420 /* SideMenuDecorator.swift in Sources */,
