@@ -1,38 +1,15 @@
 //
-//  SideMenuItem.swift
+//  CustomSideMenuItemCell.swift
 //  Chatter
 //
-//  Created by Nick Kurochkin on 03.03.2020.
+//  Created by Nick Kurochkin on 10.03.2020.
 //  Copyright © 2020 Nick Kurochkin. All rights reserved.
 //
 
 import UIKit
+import FloatingSideMenu
 
-class SideMenuPath {
-    var previousIndex: Int? = nil
-    var selectedIndex: Int? = nil
-    
-    init(){}
-    
-    init(previousIndex: Int?, selectedIndex: Int?){
-        self.previousIndex = previousIndex
-        self.selectedIndex = selectedIndex
-    }
-}
-
-class SideMenuItem {
-    var icon: UIImage?
-    var title: String
-    var viewController: SideMenuItemController
-    
-    init(icon: UIImage?, title: String, viewController: SideMenuItemController) {
-        self.icon = icon
-        self.title = title
-        self.viewController = viewController
-    }
-}
-
-class SideMenuItemCell: UIView {
+class CustomSideMenuItemCell: UIView, SideMenuItemCellDelegate {
     var icon: UIImageView = {
         let view = UIImageView()
         view.tintColor = UIColor(rgb: 0x87ABAA)
@@ -75,7 +52,11 @@ class SideMenuItemCell: UIView {
     }
     
     func select(_ select: Bool) {
-        icon.tintColor = select ? UIColor.white : UIColor(rgb: 0x87ABAA)
-        title.textColor = select ? UIColor.white : UIColor(rgb: 0x87ABAA)
+        icon.tintColor = select ? .red : UIColor(rgb: 0x87ABAA)
+        title.textColor = select ? .red : UIColor(rgb: 0x87ABAA)
+    }
+    
+    static func cellHeight(stackWidth: CGFloat) -> CGFloat {
+        return 52
     }
 }

@@ -7,11 +7,11 @@
 //
 
 import UIKit
+import FloatingSideMenu
 
-class BaseViewController: UIViewController {
+class BaseViewController: SideMenuItemController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.backgroundColor = UIColor.Default.whiteGray
     }
 }

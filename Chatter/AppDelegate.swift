@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FloatingSideMenu
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,14 +16,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         
+        window?.rootViewController = setupSideMenu()
+        window!.makeKeyAndVisible()
         
-        let view1 = SideMenuItemController()
-        view1.view.backgroundColor = .blue
+        return true
+    }
+    
+    func setupSideMenu() -> SideMenu {
+        let view1 = CatsListViewController()
         let item1 = SideMenuItem(icon: UIImage(named: "ic_rounded_plus"), title: "blue", viewController: view1)
         
         let view2 = SideMenuItemController()
         view2.view.backgroundColor = .green
-        let item2 = SideMenuItem(icon: UIImage(named: "ic_rounded_plus"), title: "green", viewController: view2)
+        let item2 = SideMenuItem(icon: nil, title: "green", viewController: view2)
         
         let view3 = SideMenuItemController()
         view3.view.backgroundColor = .yellow
@@ -30,15 +36,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let view4 = SideMenuItemController()
         view4.view.backgroundColor = .cyan
-        let item4 = SideMenuItem(icon: UIImage(named: "ic_rounded_plus"), title: "cyan", viewController: view4)
+        let item4 = SideMenuItem(icon: nil, title: "cyan", viewController: view4)
         
+        let profile = ProfileMenuViewController()
         
-        let contr = SideMenu(items: [item1, item2, item3, item4])//AuthorizationViewController()
+        let menu = SideMenu(items: [item1, item2, item3, item4])//AuthorizationViewController()
         
-        window?.rootViewController = contr
-        window!.makeKeyAndVisible()
+        menu.view.backgroundColor = UIColor(rgb: 0x3B6060)
+        menu.topView = profile.view
+        menu.menuItemCellClass = CustomSideMenuItemCell.self
         
-        return true
+        return menu
     }
 }
-
