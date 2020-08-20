@@ -18,14 +18,12 @@
 		A332031A23E85B5500E6F49D /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A332031623E85B2B00E6F49D /* Montserrat-Medium.ttf */; };
 		A332031B23E85B5800E6F49D /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A332031723E85B2B00E6F49D /* Montserrat-Regular.ttf */; };
 		A332031D23E85BFA00E6F49D /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = A332031C23E85BFA00E6F49D /* UIFont.swift */; };
-		A34C8CF12417881100ECF815 /* FloatingSideMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A34C8CF0241787CC00ECF815 /* FloatingSideMenu.framework */; };
-		A34C8CF22417881100ECF815 /* FloatingSideMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A34C8CF0241787CC00ECF815 /* FloatingSideMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A34C8CF42417883700ECF815 /* Pods_Chatter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 443AB1E92F3C4291F9A6FBEF /* Pods_Chatter.framework */; };
 		A34C8CF52417883700ECF815 /* Pods_Chatter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 443AB1E92F3C4291F9A6FBEF /* Pods_Chatter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A34C8CFC2417B8DD00ECF815 /* ProfileMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8CFB2417B8DD00ECF815 /* ProfileMenuViewController.swift */; };
 		A34C8CFE2417B90000ECF815 /* CustomSideMenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C8CFD2417B90000ECF815 /* CustomSideMenuItemCell.swift */; };
 		A35238B123E2FC87005C19F7 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35238B023E2FC87005C19F7 /* String.swift */; };
-		A354CB9B241A55BB004F75D9 /* CatsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A354CB9A241A55BB004F75D9 /* CatsListViewController.swift */; };
+		A354CB9B241A55BB004F75D9 /* ListTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A354CB9A241A55BB004F75D9 /* ListTemplateViewController.swift */; };
 		A382B69B23E17A6E008C56D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A382B69A23E17A6E008C56D2 /* AppDelegate.swift */; };
 		A382B6A423E17A6F008C56D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A382B6A323E17A6F008C56D2 /* Assets.xcassets */; };
 		A382B6A723E17A6F008C56D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A382B6A523E17A6F008C56D2 /* LaunchScreen.storyboard */; };
@@ -40,6 +38,8 @@
 		A382B6DB23E189A3008C56D2 /* DesignPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = A382B6DA23E189A3008C56D2 /* DesignPattern.swift */; };
 		A382B6DF23E1985E008C56D2 /* PagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A382B6DE23E1985E008C56D2 /* PagerView.swift */; };
 		A382B6E223E1A46A008C56D2 /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A382B6E123E1A46A008C56D2 /* Shadow.swift */; };
+		A3C2D43C24249FA30023C04F /* FloatingSideMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3C2D43B24249F5F0023C04F /* FloatingSideMenu.framework */; };
+		A3C2D43D24249FA30023C04F /* FloatingSideMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A3C2D43B24249F5F0023C04F /* FloatingSideMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A3C980B223E95FAE00468E91 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C980B123E95FAE00468E91 /* RoundedButton.swift */; };
 		A3C980B523E99FF200468E91 /* PhoneInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C980B423E99FF200468E91 /* PhoneInput.swift */; };
 		A3CAA65623F2C441002CC3EB /* CustomTextInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CAA65523F2C441002CC3EB /* CustomTextInputs.swift */; };
@@ -47,13 +47,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A34C8CEF241787CC00ECF815 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A34C8CEB241787CC00ECF815 /* FloatingSideMenu.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A38E734724127B3E00D3F758;
-			remoteInfo = FloatingSideMenu;
-		};
 		A382B6AE23E17A6F008C56D2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A382B68F23E17A6E008C56D2 /* Project object */;
@@ -68,6 +61,13 @@
 			remoteGlobalIDString = A382B69623E17A6E008C56D2;
 			remoteInfo = Chatter;
 		};
+		A3C2D43A24249F5F0023C04F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A3C2D43624249F5F0023C04F /* FloatingSideMenu.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A38E734724127B3E00D3F758;
+			remoteInfo = FloatingSideMenu;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -77,8 +77,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				A3C2D43D24249FA30023C04F /* FloatingSideMenu.framework in Embed Frameworks */,
 				A34C8CF52417883700ECF815 /* Pods_Chatter.framework in Embed Frameworks */,
-				A34C8CF22417881100ECF815 /* FloatingSideMenu.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -101,11 +101,10 @@
 		A332031723E85B2B00E6F49D /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		A332031823E85B2B00E6F49D /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
 		A332031C23E85BFA00E6F49D /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
-		A34C8CEB241787CC00ECF815 /* FloatingSideMenu.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FloatingSideMenu.xcodeproj; path = ../FloatingSideMenu/FloatingSideMenu.xcodeproj; sourceTree = "<group>"; };
 		A34C8CFB2417B8DD00ECF815 /* ProfileMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuViewController.swift; sourceTree = "<group>"; };
 		A34C8CFD2417B90000ECF815 /* CustomSideMenuItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSideMenuItemCell.swift; sourceTree = "<group>"; };
 		A35238B023E2FC87005C19F7 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		A354CB9A241A55BB004F75D9 /* CatsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsListViewController.swift; sourceTree = "<group>"; };
+		A354CB9A241A55BB004F75D9 /* ListTemplateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTemplateViewController.swift; sourceTree = "<group>"; };
 		A382B69723E17A6E008C56D2 /* Chatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A382B69A23E17A6E008C56D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A382B6A323E17A6F008C56D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -126,6 +125,7 @@
 		A382B6DA23E189A3008C56D2 /* DesignPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignPattern.swift; sourceTree = "<group>"; };
 		A382B6DE23E1985E008C56D2 /* PagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagerView.swift; sourceTree = "<group>"; };
 		A382B6E123E1A46A008C56D2 /* Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
+		A3C2D43624249F5F0023C04F /* FloatingSideMenu.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FloatingSideMenu.xcodeproj; path = ../FloatingSideMenu/FloatingSideMenu.xcodeproj; sourceTree = "<group>"; };
 		A3C980B123E95FAE00468E91 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		A3C980B423E99FF200468E91 /* PhoneInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInput.swift; sourceTree = "<group>"; };
 		A3CAA65523F2C441002CC3EB /* CustomTextInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextInputs.swift; sourceTree = "<group>"; };
@@ -140,8 +140,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3C2D43C24249FA30023C04F /* FloatingSideMenu.framework in Frameworks */,
 				A34C8CF42417883700ECF815 /* Pods_Chatter.framework in Frameworks */,
-				A34C8CF12417881100ECF815 /* FloatingSideMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,14 +204,6 @@
 			path = "Font files";
 			sourceTree = "<group>";
 		};
-		A34C8CEC241787CC00ECF815 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A34C8CF0241787CC00ECF815 /* FloatingSideMenu.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		A34C8CF92417B8C000ECF815 /* CustomSideMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,18 +213,18 @@
 			path = CustomSideMenu;
 			sourceTree = "<group>";
 		};
-		A354CB98241A5599004F75D9 /* CatsList */ = {
+		A354CB98241A5599004F75D9 /* ListTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				A354CB9A241A55BB004F75D9 /* CatsListViewController.swift */,
+				A354CB9A241A55BB004F75D9 /* ListTemplateViewController.swift */,
 			);
-			path = CatsList;
+			path = ListTemplate;
 			sourceTree = "<group>";
 		};
 		A382B68E23E17A6E008C56D2 = {
 			isa = PBXGroup;
 			children = (
-				A34C8CEB241787CC00ECF815 /* FloatingSideMenu.xcodeproj */,
+				A3C2D43624249F5F0023C04F /* FloatingSideMenu.xcodeproj */,
 				A382B69923E17A6E008C56D2 /* Chatter */,
 				A382B6B023E17A6F008C56D2 /* ChatterTests */,
 				A382B6BB23E17A6F008C56D2 /* ChatterUITests */,
@@ -288,7 +280,7 @@
 		A382B6CA23E17CD2008C56D2 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				A354CB98241A5599004F75D9 /* CatsList */,
+				A354CB98241A5599004F75D9 /* ListTemplate */,
 				A34C8CF92417B8C000ECF815 /* CustomSideMenu */,
 				A382B6D123E182C1008C56D2 /* Authorization */,
 			);
@@ -352,6 +344,14 @@
 				A382B6E123E1A46A008C56D2 /* Shadow.swift */,
 			);
 			path = Style;
+			sourceTree = "<group>";
+		};
+		A3C2D43724249F5F0023C04F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A3C2D43B24249F5F0023C04F /* FloatingSideMenu.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		A3C980B023E95F9000468E91 /* Buttons */ = {
@@ -481,8 +481,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = A34C8CEC241787CC00ECF815 /* Products */;
-					ProjectRef = A34C8CEB241787CC00ECF815 /* FloatingSideMenu.xcodeproj */;
+					ProductGroup = A3C2D43724249F5F0023C04F /* Products */;
+					ProjectRef = A3C2D43624249F5F0023C04F /* FloatingSideMenu.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -495,11 +495,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A34C8CF0241787CC00ECF815 /* FloatingSideMenu.framework */ = {
+		A3C2D43B24249F5F0023C04F /* FloatingSideMenu.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = FloatingSideMenu.framework;
-			remoteRef = A34C8CEF241787CC00ECF815 /* PBXContainerItemProxy */;
+			remoteRef = A3C2D43A24249F5F0023C04F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -612,7 +612,7 @@
 				A34C8CFE2417B90000ECF815 /* CustomSideMenuItemCell.swift in Sources */,
 				A382B6D523E186CD008C56D2 /* AuthorizationInterpreter.swift in Sources */,
 				A382B6D323E182E1008C56D2 /* AuthorizationViewController.swift in Sources */,
-				A354CB9B241A55BB004F75D9 /* CatsListViewController.swift in Sources */,
+				A354CB9B241A55BB004F75D9 /* ListTemplateViewController.swift in Sources */,
 				A382B69B23E17A6E008C56D2 /* AppDelegate.swift in Sources */,
 				A382B6D023E18032008C56D2 /* Colors.swift in Sources */,
 				A3C980B523E99FF200468E91 /* PhoneInput.swift in Sources */,
@@ -680,6 +680,7 @@
 		A382B6BF23E17A6F008C56D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -740,6 +741,7 @@
 		A382B6C023E17A6F008C56D2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -795,6 +797,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E542D5C18D0A77A68F62C8FD /* Pods-Chatter.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VRPS5BXS27;
@@ -815,6 +818,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 410C7D07314390A4A6F42ABF /* Pods-Chatter.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VRPS5BXS27;

@@ -5,15 +5,11 @@ target 'Chatter' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for Chatter
-
   target 'ChatterTests' do
     inherit! :search_paths
-    # Pods for testing
   end
 
   target 'ChatterUITests' do
-    # Pods for testing
   end
 
 end

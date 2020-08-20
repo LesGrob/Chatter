@@ -22,7 +22,7 @@ class ProfileMenuViewController: UIViewController {
         let view = UILabel()
         view.font = .customFont(ofSize: 16, weight: .medium)
         view.textColor = UIColor(rgb: 0xE4F7F9)
-        view.text = "Miroslava Savitskaya"
+        view.text = "User Name"
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
